@@ -10,5 +10,5 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface CategoryRepository extends ReactiveMongoRepository<Category, Integer> {
 
-//	Mono<Category> findByIdAndDeleteFlagFalse(Integer id);
+	Mono<Category> findByIdAndDeleteFlagFalse(Integer id);
 }

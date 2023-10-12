@@ -19,5 +19,5 @@ public class MongoSequence {
 	@Id
 	private String id;
 
-	private int sequence;
+	private int seq;
 }

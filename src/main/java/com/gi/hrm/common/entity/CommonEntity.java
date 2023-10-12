@@ -28,18 +28,21 @@ public class CommonEntity {
 
 	private Boolean deleteFlag;
 
-	public void setCommonRegist() {
+	public void setCommonRegist(Integer userId) {
 		this.createdAt = new Date();
+		this.createdBy = userId;
 		this.updatedAt = this.createdAt;
+		this.updatedBy = this.createdBy;
 		this.deleteFlag = false;
 	}
 
-	public void setCommonUpdate() {
-		this.createdAt = new Date();
+	public void setCommonUpdate(Integer userId) {
+		this.updatedAt = new Date();
+		this.updatedBy = userId;
 	}
 
-	public void setCommonDelete() {
-		this.deleteFlag = false;
-		this.setCommonUpdate();
+	public void setCommonDelete(Integer userId) {
+		this.deleteFlag = true;
+		this.setCommonUpdate(userId);
 	}
 }

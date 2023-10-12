@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryServiceHandler {
 	@Override
 	public Mono<ServerResponse> upsert(ServerRequest request) {
 		return request.bodyToMono(CategoryUpserRequest.class).map(detailService::upsertCategory)
-		        .flatMap(PreBuiltServerResponse::success);
+				.flatMap(PreBuiltServerResponse::success);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryServiceHandler {
 
 	@Override
 	public Mono<ServerResponse> delete(ServerRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return Mono.just(request.queryParam("id")).flatMap(optional -> optional.map(Mono::just).orElseGet(Mono::empty))
+				.map(detailService::deleteCategory).flatMap(PreBuiltServerResponse::success);
 	}
 }
