@@ -10,19 +10,19 @@ import org.springframework.web.reactive.function.server.RouterFunctions.Builder;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.gi.hrm.common.CommonRouterProperties;
-import com.gi.hrm.service.category.CategoryServiceHandler;
+import com.gi.hrm.service.workspace.WorkspaceRouterHandler;
 
 @Configuration
-public class CategoryRouterConfig extends CommonRouterProperties {
+public class WorkspaceRouterConfig extends CommonRouterProperties {
 
 	@Bean
-	RouterFunction<ServerResponse> categoryRouterFunction(CategoryServiceHandler categoryHandler) {
+	RouterFunction<ServerResponse> workspaceRouterFunction(WorkspaceRouterHandler handler) {
 		Consumer<Builder> consumerBuilder = builder -> {
-			builder.GET("list", categoryHandler::list);
-			builder.PUT("upsert", categoryHandler::upsert);
-			builder.DELETE("delete", categoryHandler::delete);
+			builder.GET("search", handler::search);
+			builder.PUT("upsert", handler::upsert);
+			builder.DELETE("delete", handler::delete);
 		};
 
-		return RouterFunctions.route().path(CATEGORY_ENDPOINT, consumerBuilder).build();
+		return RouterFunctions.route().path(WORKSPACE_ENDPOINT, consumerBuilder).build();
 	}
 }

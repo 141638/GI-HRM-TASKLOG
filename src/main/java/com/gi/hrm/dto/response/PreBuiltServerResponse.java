@@ -3,6 +3,7 @@ package com.gi.hrm.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class PreBuiltServerResponse {
@@ -14,9 +15,13 @@ public class PreBuiltServerResponse {
 		return ServerResponse.ok().body(ApiResponse.reactiveApiResponseSuccess(responseObject), ApiResponse.class);
 	}
 
+	public static <T> Mono<ServerResponse> success(Flux<T> responseList) {
+		return PreBuiltServerResponse.success(responseList.collectList());
+	}
+
 	public static Mono<ServerResponse> badRequest(Mono<?> responseObject) {
 		return ServerResponse.badRequest().body(
-				ErrorResponse.reactiveApiResponseErrorHandler(HttpStatus.BAD_REQUEST, responseObject),
-				ApiResponse.class);
+		        ErrorResponse.reactiveApiResponseErrorHandler(HttpStatus.BAD_REQUEST, responseObject),
+		        ApiResponse.class);
 	}
 }

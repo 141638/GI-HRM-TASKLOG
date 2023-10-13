@@ -12,6 +12,8 @@ public class CorsConfigurationSourceImpl implements CorsConfigurationSource {
 	public CorsConfiguration getCorsConfiguration(ServerWebExchange exchange) {
 		CorsConfiguration corsConfig = new CorsConfiguration();
 		corsConfig.addAllowedOrigin("http://localhost:4201");
+		corsConfig.addAllowedOrigin("http://localhost:8888");
+		corsConfig.addAllowedHeader("*");
 		corsConfig.addAllowedMethod("*");
 		corsConfig.addAllowedHeader("*");
 		return corsConfig;
