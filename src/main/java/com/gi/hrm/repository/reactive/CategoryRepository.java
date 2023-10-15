@@ -1,4 +1,4 @@
-package com.gi.hrm.repository;
+package com.gi.hrm.repository.reactive;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Getter
@@ -21,6 +22,10 @@ public class ApiResponse {
 
 	public static Mono<ApiResponse> reactiveApiResponseSuccess(Mono<?> mono) {
 		return mono.map(ApiResponse::apiResponseSuccess);
+	}
+
+	public static Flux<ApiResponse> reactiveApiResponseSuccess(Flux<?> flux) {
+		return flux.map(ApiResponse::apiResponseSuccess);
 	}
 
 	public static Mono<ApiResponse> reactiveApiResponseErrorHandler(HttpStatus status, Mono<?> mono) {

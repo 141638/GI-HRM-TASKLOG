@@ -4,21 +4,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import com.gi.hrm.dto.request.workspace.WorkspaceUpsertRequest;
+
+import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @Service
+@AllArgsConstructor
 public class WorkspaceRouterHandlerImpl implements WorkspaceRouterHandler {
+	private final WorkspaceService workspaceService;
 
 	@Override
 	public Mono<ServerResponse> search(ServerRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return Mono.fromCallable(request::queryParams).flatMap(workspaceService::search);
 	}
 
 	@Override
 	public Mono<ServerResponse> upsert(ServerRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return request.bodyToMono(WorkspaceUpsertRequest.class).flatMap(workspaceService::upsert);
 	}
 
 	@Override
@@ -26,5 +29,4 @@ public class WorkspaceRouterHandlerImpl implements WorkspaceRouterHandler {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.gi.hrm.dto.request.category.CategoryUpserRequest;
 import com.gi.hrm.entity.Category;
 import com.gi.hrm.exception.RecordNotFoundException;
-import com.gi.hrm.repository.CategoryRepository;
+import com.gi.hrm.repository.reactive.CategoryRepository;
 import com.gi.hrm.service.mongo.MongoUtilService;
 
 import lombok.AllArgsConstructor;

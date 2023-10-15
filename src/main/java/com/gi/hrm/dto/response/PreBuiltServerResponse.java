@@ -16,12 +16,12 @@ public class PreBuiltServerResponse {
 	}
 
 	public static <T> Mono<ServerResponse> success(Flux<T> responseList) {
-		return PreBuiltServerResponse.success(responseList.collectList());
+		return ServerResponse.ok().body(ApiResponse.reactiveApiResponseSuccess(responseList), ApiResponse.class);
 	}
 
 	public static Mono<ServerResponse> badRequest(Mono<?> responseObject) {
 		return ServerResponse.badRequest().body(
-		        ErrorResponse.reactiveApiResponseErrorHandler(HttpStatus.BAD_REQUEST, responseObject),
-		        ApiResponse.class);
+				ErrorResponse.reactiveApiResponseErrorHandler(HttpStatus.BAD_REQUEST, responseObject),
+				ApiResponse.class);
 	}
 }
