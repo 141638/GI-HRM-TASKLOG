@@ -22,6 +22,7 @@ public class CategoryDetailService {
 
 	public Mono<Category> upsertCategory(CategoryUpserRequest request) {
 		Integer id = request.getId();
+		Integer workspaceId = request.getWorkspaceId();
 		String name = request.getName();
 		String color = request.getColor();
 		if (Objects.nonNull(id)) {
@@ -35,7 +36,7 @@ public class CategoryDetailService {
 
 		} else {
 			return mongoService.generateSequence(Category.SEQUENCE_NAME).map(idSeq -> {
-				Category category = new Category(name, color);
+				Category category = new Category(workspaceId, name, color);
 				category.setId(idSeq);
 				category.setCommonRegist(1);
 				return category;

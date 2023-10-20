@@ -11,4 +11,8 @@ public interface CategoryServiceHandler {
 	public Mono<ServerResponse> list(ServerRequest request);
 
 	public Mono<ServerResponse> delete(ServerRequest request);
+
+	public Mono<ServerResponse> dropdownCategoryByWorkspaceId(ServerRequest request);
+
+	public Mono<ServerResponse> fluxStreamTest(ServerRequest request);
 }

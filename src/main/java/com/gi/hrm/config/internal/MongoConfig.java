@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoDatabase;
 
 @Configuration
 @EnableReactiveMongoRepositories(basePackages = "com.gi.hrm.repository")
@@ -28,6 +29,11 @@ public class MongoConfig extends AbstractReactiveMongoConfiguration {
 	@Override
 	protected String getDatabaseName() {
 		return env.getProperty("spring.data.mongodb.database");
+	}
+
+	@Bean("mongoDatabase")
+	MongoDatabase getMongoDatabase() {
+		return reactiveMongoClient().getDatabase(getDatabaseName());
 	}
 
 	@Bean("reactiveMongoTemplate")

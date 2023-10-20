@@ -21,6 +21,8 @@ public class CategoryRouterConfig extends CommonRouterProperties {
 			builder.GET("list", categoryHandler::list);
 			builder.PUT("upsert", categoryHandler::upsert);
 			builder.DELETE("delete", categoryHandler::delete);
+			builder.GET("dropdown-by-workspace-id", categoryHandler::dropdownCategoryByWorkspaceId);
+			builder.GET("flux-stream-test", categoryHandler::fluxStreamTest);
 		};
 
 		return RouterFunctions.route().path(CATEGORY_ENDPOINT, consumerBuilder).build();

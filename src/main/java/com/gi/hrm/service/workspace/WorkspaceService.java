@@ -12,7 +12,9 @@ import com.gi.hrm.common.utils.DateTimeUtils;
 import com.gi.hrm.common.utils.Utils;
 import com.gi.hrm.dto.request.workspace.WorkspaceUpsertRequest;
 import com.gi.hrm.dto.response.PreBuiltServerResponse;
+import com.gi.hrm.dto.response.workspace.WorkspaceSearchResponse;
 import com.gi.hrm.entity.Workspace;
+import com.gi.hrm.exception.BadRequestException;
 import com.gi.hrm.exception.RecordNotFoundException;
 import com.gi.hrm.repository.reactive.WorkspaceRepository;
 import com.gi.hrm.service.mongo.MongoUtilService;
@@ -73,8 +75,18 @@ public class WorkspaceService {
 		String projectId = params.getFirst("projectId");
 		String staffId = params.getFirst("staffId");
 
-		Flux<Workspace> workspaceFlux = workspaceRepository.search(name, projectId, staffId);
+		Flux<WorkspaceSearchResponse> workspaceFlux = workspaceRepository.search(name, projectId, staffId);
 
 		return PreBuiltServerResponse.success(workspaceFlux);
+	}
+
+	public Mono<ServerResponse> delete(MultiValueMap<String, String> params) {
+		return Mono.just(params.getFirst("id"))
+		        .switchIfEmpty(Mono.error(new BadRequestException("param {id} not found", 002))).map(Integer::parseInt)
+		        .flatMap(workspaceRepository::findByIdAndDeleteFlagFalse)
+		        .switchIfEmpty(Mono.error(new RecordNotFoundException("workspace"))).map(item -> {
+			        item.setCommonDelete(1);
+			        return item;
+		        }).map(workspaceRepository::save).flatMap(PreBuiltServerResponse::success);
 	}
 }

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Document(value = CommonEntityProperties.COLLECTION_ISSUE_TYPE)
 public class IssueType extends CommonEntity {
+	private Integer workspaceId;
 	private String name;
 	private String color;
 }

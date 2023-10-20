@@ -26,7 +26,6 @@ public class WorkspaceRouterHandlerImpl implements WorkspaceRouterHandler {
 
 	@Override
 	public Mono<ServerResponse> delete(ServerRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return Mono.fromCallable(request::queryParams).flatMap(workspaceService::delete);
 	}
 }

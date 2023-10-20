@@ -1,9 +1,9 @@
 package com.gi.hrm.repository.template.workspace;
 
-import com.gi.hrm.entity.Workspace;
+import com.gi.hrm.dto.response.workspace.WorkspaceSearchResponse;
 
 import reactor.core.publisher.Flux;
 
 public interface WorkspaceTemplateOperation {
-	Flux<Workspace> search(String name, String projectId, String staffId);
+	Flux<WorkspaceSearchResponse> search(String name, String projectId, String staffId);
 }

@@ -20,6 +20,7 @@ public class Category extends CommonEntity {
 
 	@Transient
 	public static final String SEQUENCE_NAME = "categories_sequence";
+	private Integer workspaceId;
 	private String name;
 	private String color;
 }

@@ -15,7 +15,6 @@ public class CorsConfigurationSourceImpl implements CorsConfigurationSource {
 		corsConfig.addAllowedOrigin("http://localhost:8888");
 		corsConfig.addAllowedHeader("*");
 		corsConfig.addAllowedMethod("*");
-		corsConfig.addAllowedHeader("*");
 		return corsConfig;
 	}
 

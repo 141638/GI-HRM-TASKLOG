@@ -21,7 +21,7 @@ public class MongoUtilService {
 
 	public Mono<Integer> generateSequence(String seqName) {
 		return operation.findAndModify(query(where(CommonEntityProperties.FIELD_ID).is(seqName)),
-				new Update().inc("seq", 1), options().returnNew(true).upsert(true), MongoSequence.class)
-				.map(MongoSequence::getSeq);
+		        new Update().inc("seq", 1), options().returnNew(true).upsert(true), MongoSequence.class)
+		        .map(MongoSequence::getSeq);
 	}
 }

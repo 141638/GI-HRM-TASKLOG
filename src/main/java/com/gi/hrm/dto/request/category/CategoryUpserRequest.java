@@ -9,6 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class CategoryUpserRequest {
 	private Integer id;
+	private Integer workspaceId;
 	private String name;
 	private String color;
 }

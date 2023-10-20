@@ -6,8 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class WorkspaceSearchResponse {
+	private Integer id;
 	private String name;
 	private String alias;
-	private String project;
+	private String projectName;
+	private String projectCuratorName;
 	private Integer totalMember;
 }
